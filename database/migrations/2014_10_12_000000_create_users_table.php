@@ -9,18 +9,20 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
-            $table->timestamps();
-        });
-    }
+    public function up()
+{
+    Schema::create('users', function (Blueprint $table) {
+        $table->id(); // Primary Key auto-increment
+        $table->string('name'); // Nama pengguna
+        $table->string('email')->unique(); // Email unik
+        $table->timestamp('email_verified_at')->nullable(); // Email verifikasi, bisa null
+        $table->string('password'); // Password
+        $table->string('role')->default('user'); // Role default 'user', bisa 'admin', 'superadmin'
+        $table->rememberToken(); // Token untuk remember me saat login
+        $table->timestamps(); // created_at dan updated_at otomatis
+    });
+}
+
 
     /**
      * Reverse the migrations.
